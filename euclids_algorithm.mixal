@@ -1,0 +1,15 @@
+* Program E: An implementation of Euclid's Algorithm
+* by tlehman on 1380146870, first full MIX program
+*
+* The idea behind thef algorithm comes from the mathematical fact that
+* gcd(m, n) = gcd(n, m mod n), this is where the reduction step comes from.
+*
+* E1. [Find remainder]
+*    r <- m mod n
+* E2. [Is it zero?] if r=0, terminate
+* E3. [Reduce]
+*    m <- n
+*    n <- r (m mod n)
+
+START  
+
