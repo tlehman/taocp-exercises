@@ -10,6 +10,25 @@
 * E3. [Reduce]
 *    m <- n
 *    n <- r (m mod n)
+* 
+* This program will use the values m=165, n=90, where gcd(m,n)=15
+*
+* rX  <- m
+* rI1 <- n
 
-START  
-
+DVSR  EQU	100	* store n for DIV operation
+SWAP  EQU	101	* swap to handle reg-to-reg transfers (inefficient)
+START ENTA	=0=
+      ENTX	=165=
+      ENT1	=90=
+E1    ST1	DVSR	* store n in DVSR
+      DIV	DVSR	* rA <- m//n; rX <- m%n
+E2    CMPX	=0=
+      JE	QUIT	* halt if r=0, then CONTENTS(DVSOR)=gcd(m,n)
+E3    STX	SWAP
+      LD1	SWAP	* n <- r
+      LDX	DVSR	* m <- n
+      ENTA	=0=
+      JMP	E1	* go to E1
+QUIT  OUT	DVSR(19)
+      END	START
