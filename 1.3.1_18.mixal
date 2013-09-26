@@ -1,0 +1,28 @@
+* 1.3.1 (18) After the following 'number one' program has been
+* executed, what changes to registers, toggles, and memory have 
+* taken place? 
+START	  STZ		1
+	  ENNX		1
+	  STX		1(0:1)
+	  SLAX		1
+	  ENNA		1
+	  INCX		1
+	  ENT1		1
+	  SRC		1
+	  ADD		1
+	  DEC1		-1
+	  STZ		1
+	  CMPA		1
+	  MOVE		-1,1(1)
+	  NUM		1
+	  CHAR		1
+	  HLT		1
+	  END		START
+
+* Final state: 
+* rA: - 31 30 30 30 30 (0528082846)
+* rX: + 31 30 30 30 30 (0528082846)
+* rJ: + 00 00 (0000)
+* rI1: + 00 03 (0003)	rI2: + 00 00 (0000)	
+* rI3: + 00 00 (0000)	rI4: + 00 00 (0000)	
+* rI5: + 00 00 (0000)	rI6: + 00 00 (0000)	
