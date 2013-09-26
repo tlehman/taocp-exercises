@@ -2,7 +2,8 @@
 * by tlehman on 1380146870, first full MIX program
 *
 * The idea behind thef algorithm comes from the mathematical fact that
-* gcd(m, n) = gcd(n, m mod n), this is where the reduction step comes from.
+* gcd(m, n) = gcd(n, r), this is where the reduction step comes from.
+* 	      	    (r = m mod n)
 *
 * E1. [Find remainder]
 *    r <- m mod n
@@ -18,9 +19,9 @@
 
 DVSR  EQU	100	* store n for DIV operation
 SWAP  EQU	101	* swap to handle reg-to-reg transfers (inefficient)
-START ENTA	=0=
-      ENTX	=165=
-      ENT1	=90=
+START ENTA	0
+      ENTX	165
+      ENT1	90
 E1    ST1	DVSR	* store n in DVSR
       DIV	DVSR	* rA <- m//n; rX <- m%n
 E2    CMPX	=0=
@@ -28,7 +29,8 @@ E2    CMPX	=0=
 E3    STX	SWAP
       LD1	SWAP	* n <- r
       LDX	DVSR	* m <- n
-      ENTA	=0=
+      ENTA	0
       JMP	E1	* go to E1
-QUIT  OUT	DVSR(19)
+QUIT  CHAR	0
+      OUT	DVSR(19)
       END	START
