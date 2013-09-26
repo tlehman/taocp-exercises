@@ -17,6 +17,7 @@
 * rX  <- m
 * rI1 <- n
 
+PRNT  EQU	19	* Typewriter terminal, stdout in MDK
 DVSR  EQU	100	* store n for DIV operation
 SWAP  EQU	101	* swap to handle reg-to-reg transfers (inefficient)
 START ENTA	0
@@ -31,6 +32,9 @@ E3    STX	SWAP
       LDX	DVSR	* m <- n
       ENTA	0
       JMP	E1	* go to E1
-QUIT  CHAR	0
-      OUT	DVSR(19)
+QUIT  LDA	DVSR    * rA <- gcd(m,n)
+      CHAR	0       * convert rA to character code
+      STX	DVSR	* store least significant digits in DVSR cell
+      OUT	DVSR(PRNT)
+      HLT
       END	START
