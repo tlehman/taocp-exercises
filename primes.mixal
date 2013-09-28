@@ -1,0 +1,25 @@
+* Program P: Print the first 500 primes
+* rI1 = J
+* rI2 = N
+* rI3 = K
+L 	  EQU	   500 	     	 * the number of primes to find
+PRINTER	  EQU	   19	     	 * Typewriter terminal, stdout in MDK
+PRIME	  EQU	   -1	     	 * Memory area for table of primes
+BUF0	  EQU	   2000	     	 * Memory area for BUFFER[0]
+BUF1	  EQU	   BUF0+25   	 * Memory area for BUFFER[1]
+	  ORIG	   3000
+START	  IOC	   0(PRINTER)	 * Skip to new page
+	  LD1	   =1-L=	 * P1. Start table J <- 1
+	  LD2	   =3=		 * N <- 3
+2H	  INC1	   1		 * P2. N is prime J <- J+1
+	  ST2	   PRIME+L,1	 * PRIME[K] <- N
+	  J1Z	   2F		 * P3. 500 found?
+4H	  INC2	   2		 * P4. Advance N
+	  ENT3	   2		 * P5. K <- 2
+6H	  ENTA	   0		 * P6. PRIME[K]\N?
+	  ENTX	   0,2		 * rAX <- N
+	  DIV	   PRIME,3	 * rA <- (N // PRIME[K]), rX <- (N % PRIME[K])
+	  JXZ	   4B		 * To P4 if remainder 0
+	  CMPA	   PRIME,3	 * P7. PRIME[K] large?
+	  JG	   6B		 * To P6 if quotient > PRIME[K]
+	  JMP	   2B		 *       otherwise N is prime
